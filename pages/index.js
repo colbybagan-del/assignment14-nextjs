@@ -1,42 +1,23 @@
-// Import Link so users can navigate to individual blog posts.
+
 import Link from 'next/link';
-
-// Import Date so blog post dates can be displayed in a consistent format.
 import Date from '../components/date';
-
-// Import the custom CSS module for the homepage.
 import styles from '../styles/Home.module.css';
-
-// Import Head so the homepage can define its browser title.
 import Head from 'next/head';
-
-// Import the shared Layout component and the site's title.
 import Layout, { siteTitle } from '../components/layout';
-
-// Import reusable CSS utility classes.
 import utilStyles from '../styles/utils.module.css';
+import { getSortedList } from '../lib/data';
 
-// Import the function that retrieves and sorts the Markdown blog posts.
-import { getSortedPostsData } from '../lib/posts';
-
-// Generate the blog post data at build time.
 export async function getStaticProps() {
-  // Retrieve all Markdown posts from the posts directory.
-  const allPostsData = getSortedPostsData();
+  const allPostsData = await getSortedList();
 
-  // Return the blog post data as properties for the Home component.
   return {
-    // Store the blog post data inside the props object.
     props: {
-      // Pass all of the blog post data to the Home component.
       allPostsData,
     },
   };
 }
 
-// Create the homepage and receive the blog post data as a prop.
 export default function Home({ allPostsData }) {
-  // Return the JSX that creates the homepage.
   return (
     <Layout home>
       <Head>
@@ -44,33 +25,41 @@ export default function Home({ allPostsData }) {
       </Head>
 
       <section className={`${utilStyles.headingMd} ${styles.card}`}>
-        <p>My name is Colby and I enjoy cooking and hiking outside.</p>
+        <p>Welcome to my movie collection!</p>
         <p>
-          This is my personal blog where I share some of my interests and
-          experiences.
+          Here you can explore some of my favorite movies and learn
+          more about their genres, release years, and ratings.
         </p>
       </section>
 
       <section className={`${utilStyles.headingMd} ${styles.blogSection}`}>
-        <h2 className={utilStyles.headingLg}>Blog</h2>
+        <h2 className={utilStyles.headingLg}>Movies</h2>
 
         <ul className={utilStyles.list}>
-          {allPostsData.map(({ id, date, title }) => (
-            <li
-              className={`${utilStyles.listItem} ${styles.postItem}`}
-              key={id}
-            >
-              <Link href={`/posts/${id}`} className={styles.postLink}>
-                {title}
-              </Link>
+          {allPostsData.map(
+            ({ id, date, title, genre, releaseYear, rating }) => (
+              <li
+                className={`${utilStyles.listItem} ${styles.postItem}`}
+                key={id}
+              >
+                <Link href={`/posts/${id}`} className={styles.postLink}>
+                  {title}
+                </Link>
 
-              <br />
+                <br />
 
-              <small className={utilStyles.lightText}>
-                <Date dateString={date} />
-              </small>
-            </li>
-          ))}
+                <small className={utilStyles.lightText}>
+                  Genre: {genre} | Released: {releaseYear} | Rating: {rating}/10
+                </small>
+
+                <br />
+
+                <small className={utilStyles.lightText}>
+                  <Date dateString={date} />
+                </small>
+              </li>
+            )
+          )}
         </ul>
       </section>
     </Layout>

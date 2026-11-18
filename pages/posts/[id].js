@@ -42,10 +42,15 @@ export default function Post({ postData }) {
           <Date dateString={postData.date} />
         </div>
 
-        <div
-          className={styles.content}
-          dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
-        />
+        <div className={styles.content}>
+          <p><strong>Genre:</strong> {postData.genre}</p>
+          <p><strong>Release Year:</strong> {postData.releaseYear}</p>
+          <p><strong>Rating:</strong> {postData.rating}/10</p>
+
+          <div
+            dangerouslySetInnerHTML={{ __html: postData.contentHtml }}
+          />
+        </div>
       </article>
     </Layout>
   );

@@ -1,22 +1,14 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Roboto:wght@400;500;700&display=swap');
+
 html,
 body {
   padding: 0;
   margin: 0;
-  background-color: #f3f6ff; /* Custom: adds a light blue background. */
-  color: #222222; /* Custom: changes the main text color. */
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    "Fira Sans",
-    "Droid Sans",
-    "Helvetica Neue",
-    sans-serif;
-  line-height: 1.6;
+  background-color: #f3f0ff;
+  color: #27243a;
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.7;
   font-size: 18px;
 }
 
@@ -25,16 +17,41 @@ body {
 }
 
 a {
-  color: #6b21a8; /* Custom: changes links from blue to purple. */
+  color: #6d28d9;
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 a:hover {
-  color: #9333ea; /* Custom: changes the link color when hovered. */
+  color: #9333ea;
   text-decoration: underline;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.3;
 }
 
 img {
   max-width: 100%;
   display: block;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+@media (max-width: 600px) {
+  html,
+  body {
+    font-size: 16px;
+  }
 }
